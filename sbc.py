@@ -6,11 +6,8 @@ st.title('🎧 기분에 맞는 한국 음악 추천')
 
 # 📂 CSV 파일 불러오기
 try:
-    df = pd.read_csv('spotify_tracks/spotify_tracks.csv')
+    df = pd.read_csv('spotify_tracks - spotify_tracks.csv')
     st.success("✅ 데이터 로드 완료!")
-
-    # 🔍 컬럼 확인 (디버깅용)
-    # st.write("🔍 CSV 컬럼:", df.columns.tolist())
 
     # 🇰🇷 한국어 곡만 필터링
     df_korean = df[df['language'] == 'ko']
@@ -59,4 +56,4 @@ try:
         else:
             st.warning("😥 조건에 맞는 곡이 없습니다. 다른 기분을 선택해보세요.")
 except FileNotFoundError:
-    st.error("❌ 'spotify_tracks/spotify_tracks.csv' 파일이 존재하지 않습니다. 경로를 다시 확인해주세요.")
+    st.error("❌ 'spotify_tracks - spotify_tracks.csv' 파일이 존재하지 않습니다. 경로를 다시 확인해주세요.")
