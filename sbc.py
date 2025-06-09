@@ -4,9 +4,6 @@ import kagglehub
 path = kagglehub.dataset_download("gauthamvijayaraj/spotify-tracks-dataset-updated-every-week")
 
 print("Path to dataset files:", path)
-bash
-pip install streamlit pandas matplotlib
-python
 import streamlit as st
 import pandas as pd
 
