@@ -8,16 +8,17 @@ try:
     df = pd.read_csv('spotify_tracks - spotify_tracks.csv')
     st.success("✅ 데이터 로드 완료!")
 
-    # 'language' 필터링: 외국 음악 (한국어 제외)
+    # 'language' 컬럼이 있는지 확인
     if 'language' not in df.columns:
         st.error("❌ 'language' 컬럼이 없습니다.")
     else:
+        # 외국 곡 필터링
         df_foreign = df[df['language'] != 'ko']
         if df_foreign.empty:
-            st.warning("⚠️ 외국 음악 데이터가 없습니다. 전체 데이터를 사용합니다.")
+            st.warning("⚠️ 외국 음악 데이터가 없어 전체 데이터를 사용합니다.")
             df_foreign = df
 
-        # 기분에 따라 추천곡 필터링
+        # 추천 함수
         def recommend_music(mood):
             if mood == '신나는':
                 rec = df_foreign[(df_foreign['valence'] > 0.6) & (df_foreign['energy'] > 0.6)]
@@ -36,19 +37,21 @@ try:
 
             return rec.sample(n=min(10, len(rec))) if not rec.empty else df_foreign.sample(n=min(5, len(df_foreign)))
 
-        # 사용자 입력
+        # 🌈 사용자 기분 선택
         mood = st.selectbox('지금 기분을 선택하세요:', ['신나는', '스트레스', '운동', '댄스', '추억', '공부'])
 
-        # 추천 버튼
+        # 🔄 추천 버튼
         if st.button("🔄 외국 곡 추천 받기"):
             recommendations = recommend_music(mood)
 
             st.subheader(f"🌍 '{mood}' 기분에 어울리는 외국 곡 추천")
+
             for _, row in recommendations.iterrows():
-                track_name = (
-                    f"[{row['track_name']}]({row['track_url']})" if 'track_url' in row and pd.notna(row['track_url'])
-                    else row['track_name']
-                )
+                # 링크 처리
+                if 'track_url' in row and pd.notna(row['track_url']):
+                    track_name = f'<a href="{row["track_url"]}" target="_blank">{row["track_name"]}</a>'
+                else:
+                    track_name = row['track_name']
 
                 st.markdown(f"""
                 <div style="font-size: 14px; line-height: 1.5;">
@@ -64,6 +67,5 @@ try:
                 """, unsafe_allow_html=True)
 
 except FileNotFoundError:
-    st.error("❌ 'spotify_tracks - spotify_tracks.csv' 파일이 존재하지 않습니다.")
-except Exception as e:
-    st.error(f"⚠️ 예외 발생: {e}")
+    st.error("❌ 'spotify_tracks - spotify_tracks.csv' 파일을 찾을 수 없습니다.")
+ex
