@@ -68,4 +68,5 @@ try:
 
 except FileNotFoundError:
     st.error("❌ 'spotify_tracks - spotify_tracks.csv' 파일을 찾을 수 없습니다.")
-ex
+except Exception as e:
+    st.error(f"⚠️ 예외 발생: {e}")
