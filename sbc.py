@@ -1,9 +1,3 @@
-import kagglehub
-
-# Download latest version
-path = kagglehub.dataset_download("gauthamvijayaraj/spotify-tracks-dataset-updated-every-week")
-
-print("Path to dataset files:", path)
 import streamlit as st
 import pandas as pd
 
