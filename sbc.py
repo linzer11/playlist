@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="외국 음악 추천", layout="centered")
-st.title('🎧 기분에 맞는 외국 음악 추천')
+st.title('🎧 기분에 맞는 음악 추천')
 
 try:
     df = pd.read_csv('spotify_tracks - spotify_tracks.csv')
@@ -41,10 +41,10 @@ try:
         mood = st.selectbox('지금 기분을 선택하세요:', ['신나는', '스트레스', '운동', '댄스', '추억', '공부'])
 
         # 🔄 추천 버튼
-        if st.button("🔄 외국 곡 추천 받기"):
+        if st.button("🔄 곡 추천 받기"):
             recommendations = recommend_music(mood)
 
-            st.subheader(f"🌍 '{mood}' 기분에 어울리는 외국 곡 추천")
+            st.subheader(f"🌍 '{mood}' 기분에 어울리는 곡 추천")
 
             for _, row in recommendations.iterrows():
                 # 링크 처리
