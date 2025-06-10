@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="외국 음악 추천", layout="centered")
+st.set_page_config(page_title="기분에 맞는 음악 추천", layout="centered")
 st.title('🎧 기분에 맞는 음악 추천')
 
 try:
